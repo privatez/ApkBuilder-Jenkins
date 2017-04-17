@@ -19,7 +19,7 @@ before_install:
 deploy:
   provider: releases
   api_key:
-    secure: 3ab351ac95e3929b434960d8740d4ab3f927e2e5
+    secure: 35e29045a680fda9e5318f5aadfaafc7ad0a9c3e
   file: app/build/outputs/apk/app-release.apk
   skip_cleanup: true
   on:
