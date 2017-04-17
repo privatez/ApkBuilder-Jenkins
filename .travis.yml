@@ -24,6 +24,4 @@ deploy:
   on:
     repo: privatez/AppBuilder
 after_deploy:
-- fir login 98319f387b364dde5d06b5e4c6fb0d69
-- fir me
-- fir p app/build/outputs/apk/app-release.apk
+- fir build_apk app/build/outputs/apk/app-release.apk -p -T 98319f387b364dde5d06b5e4c6fb0d69
