@@ -1,0 +1,29 @@
+language: android
+jdk: openjdk8
+sudo: false
+git:
+  depth: 3 #将git depth设置相对小的值,加快构建速度
+android:
+  components:
+  - tools
+  - build-tools-25.0.2
+  - android-25
+  - extra-android-m2repository
+  - extra-android-support
+script:
+- "./gradlew assembleRelease"
+before_install:
+- chmod +x gradlew
+- gem install fir-cli #安装fir命令行客户端
+deploy:
+  provider: releases
+  api_key:
+    secure: 3ab351ac95e3929b434960d8740d4ab3f927e2e5
+  file: app/build/outputs/apk/app-release.apk
+  skip_cleanup: true
+  on:
+    repo: privatez/AppBuilder
+after_deploy:
+- fir login 98319f387b364dde5d06b5e4c6fb0d69 #fir账号的Token
+- fir me #打印身份信息,验证是否登录成功
+- fir p app/build/outputs/apk/app-release.apk #自动发布应用至fir内测平台
