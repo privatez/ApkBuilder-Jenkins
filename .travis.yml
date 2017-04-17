@@ -15,7 +15,6 @@ script:
 - "./gradlew assembleRelease"
 before_install:
 - chmod +x gradlew
-- gem install fir-cli #安装fir命令行客户端
 deploy:
   provider: releases
   api_key:
