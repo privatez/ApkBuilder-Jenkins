@@ -22,6 +22,6 @@ deploy:
   file: app/build/outputs/apk/app-release.apk
   skip_cleanup: true
   on:
-    repo: privatez/AppBuilder
+    tags: true
 after_deploy:
-- fir p app/build/outputs/apk/app-release.apk -T 98319f387b364dde5d06b5e4c6fb0d69
+- "fir p app/build/outputs/apk/app-release.apk -T 98319f387b364dde5d06b5e4c6fb0d69"
