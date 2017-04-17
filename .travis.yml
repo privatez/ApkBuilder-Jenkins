@@ -1,10 +1,9 @@
 language: android
 sudo: false
 jdk:
-- oraclejdk8 #lambda表达式支持,如果工程中使用了rxJava等类库时添加
-sudo: false
+- oraclejdk8
 git:
-  depth: 3 #将git depth设置相对小的值,加快构建速度
+  depth: 3
 android:
   components:
   - tools
@@ -19,12 +18,11 @@ before_install:
 deploy:
   provider: releases
   api_key:
-    secure: 35e29045a680fda9e5318f5aadfaafc7ad0a9c3e
-  file: app/build/outputs/apk/app-release.apk
-  skip_cleanup: true
+    secure: FAX7hfmt3SFOIpGPG2XE38uOfGzy4h97Eh/9QJfsVewJMg7nGfbwAOuQI8PT4y7+HfeTeScgjPcq1VaLdcm1GRre1Le6r+dijbe4c6zKYfDm4soEWy4bwN0gbDUZqLBor6b4C6HwPATpZXk3/9RiN2dHBpFwNAxoHPLJQdZHCF++9x2l0G5oO/7G6cfmn2SWXJbRFa0XdEVeRmygdULCjd/VJVtEZaH4Ip6l5JbH3uh6WCviKtODWk8U1fk8IfswhDnx81rSdULko2Mz9uhoktpUyJYg9mX9aPrqNlNPvtxA51j/6Z+YazRL3Q+dB9mqTokQs8So//Ikwig6HHZjmC5jHaLKjGgnExjPlU342bWE2asnEKHFs+xXO/1vDkx5Wx7vBKGIHzOfUwnmSb8I4n43E4VBYdPiGYKCqXF1jsZ4ynDZWEM7B31lp4IgsQwK0/b6jQfuLJeSHnuj1siFgkXwSgsRk3to/eEUnMv18MvjKKJUrUBGPOwNdefkKhtDe9bKg7UoUAdRqISz3g04FXaCZyS8jhgPPNHtEsx3ET2ST6z3WNLl0cwTegY1rWPhkdabZE13tb/1n3itluMhmBKfkJNU/rBPv81fjiRTNuLBUTYUPt7BOL/hhJpTypJ26+cHz8OCfpwmVAWGl2J3yKYiMRoei8LaDx041EWlqvc=
+  file: app/build/outputs/apk/appbuilder.apk
   on:
     repo: privatez/AppBuilder
 after_deploy:
-- fir login 98319f387b364dde5d06b5e4c6fb0d69 #fir账号的Token
-- fir me #打印身份信息,验证是否登录成功
-- fir p app/build/outputs/apk/app-release.apk #自动发布应用至fir内测平台
+- fir login 98319f387b364dde5d06b5e4c6fb0d69
+- fir me
+- fir p app/build/outputs/apk/app-release.apk
