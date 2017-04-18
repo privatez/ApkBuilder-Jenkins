@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.privatez.appbulider"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        releaseConfig {
+            keyAlias 'version.alias'
+            keyPassword '123456'
+            storeFile file('./version.jks')
+            storePassword '123456'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseConfig
+        }
+    }
+    android.applicationVariants.all { variant ->
+        variant.assemble.doLast {
+            variant.outputs.each { output ->
+                def outputFile = output.outputFile
+                def versionSuffix = variant.buildType.versionNameSuffix ? variant.buildType.versionNameSuffix : ""
+                def customSuffix = project.hasProperty('suffix') ? "_" + suffix : ""
+                def versionCode = variant.mergedFlavor.versionCode + versionSuffix;
+                // 移出apk并重命名
+                if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                    println("copying apk")
+                    def renameApkFile = outputFile.name.replace("app", "app-builder-" + versionCode).replace(".apk", customSuffix + ".apk")
+                    copy {
+                        from "$outputFile"
+                        into "$rootProject.projectDir/app/build/outputs/apk"
+                        rename("$outputFile.name", "$renameApkFile")
+                    }
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.0'
+    testCompile 'junit:junit:4.12'
+}
