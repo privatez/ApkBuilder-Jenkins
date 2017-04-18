@@ -15,10 +15,8 @@ script:
 - "./gradlew assembleRelease"
 before_install:
 - chmod +x gradlew
-- ruby -v
 - rvm install ruby-2.2.0
 - rvm --default use 2.2.0
-- ruby -v
 - gem install fir-cli
 deploy:
   provider: releases
@@ -30,5 +28,6 @@ deploy:
     tags: true
     all_branches: true
 after_script:
+- pwd
 - fir p app/build/outputs/apk/app-release.apk -T $FIR_TOKEN -c "`git cat-file tag $TRAVIS_TAG`"
 - curl -F "file=@/home/travis/build/privatez/AppBuilder/app/build/outputs/apk/app-release.apk" -F "uKey=4006bd846ef865d76e72020fc4c23a43" -F "_api_key=cf5375f45349a93145a0fa0c277493e0" https://www.pgyer.com/apiv1/app/upload
