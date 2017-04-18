@@ -20,9 +20,10 @@ deploy:
   provider: releases
   api_key:
     secure: FAX7hfmt3SFOIpGPG2XE38uOfGzy4h97Eh/9QJfsVewJMg7nGfbwAOuQI8PT4y7+HfeTeScgjPcq1VaLdcm1GRre1Le6r+dijbe4c6zKYfDm4soEWy4bwN0gbDUZqLBor6b4C6HwPATpZXk3/9RiN2dHBpFwNAxoHPLJQdZHCF++9x2l0G5oO/7G6cfmn2SWXJbRFa0XdEVeRmygdULCjd/VJVtEZaH4Ip6l5JbH3uh6WCviKtODWk8U1fk8IfswhDnx81rSdULko2Mz9uhoktpUyJYg9mX9aPrqNlNPvtxA51j/6Z+YazRL3Q+dB9mqTokQs8So//Ikwig6HHZjmC5jHaLKjGgnExjPlU342bWE2asnEKHFs+xXO/1vDkx5Wx7vBKGIHzOfUwnmSb8I4n43E4VBYdPiGYKCqXF1jsZ4ynDZWEM7B31lp4IgsQwK0/b6jQfuLJeSHnuj1siFgkXwSgsRk3to/eEUnMv18MvjKKJUrUBGPOwNdefkKhtDe9bKg7UoUAdRqISz3g04FXaCZyS8jhgPPNHtEsx3ET2ST6z3WNLl0cwTegY1rWPhkdabZE13tb/1n3itluMhmBKfkJNU/rBPv81fjiRTNuLBUTYUPt7BOL/hhJpTypJ26+cHz8OCfpwmVAWGl2J3yKYiMRoei8LaDx041EWlqvc=
-  file: app/build/outputs/apk/app-release.apk
+  file: /Users/private/Downloads/apks/appbuilder.apk
   skip_cleanup: true
   on:
     tags: true
 after_deploy:
-- fir p app/build/outputs/apk/app-release.apk -T 98319f387b364dde5d06b5e4c6fb0d69
+- fir p /Users/private/Downloads/apks/appbuilder.apk -T 98319f387b364dde5d06b5e4c6fb0d69
+- curl -F "file=@/Users/private/Downloads/apks/appbuilder.apk" -F "uKey=4006bd846ef865d76e72020fc4c23a43" -F "_api_key=cf5375f45349a93145a0fa0c277493e0" https://www.pgyer.com/apiv1/app/upload
