@@ -26,7 +26,9 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-    all_branches: true
-after_script:
+    branch: master
+after_deploy:
 - fir p app/build/outputs/apk/app-release.apk -T $FIR_TOKEN -c "`git cat-file tag $TRAVIS_TAG`"
 - curl -F "file=@/home/travis/build/privatez/AppBuilder/app/build/outputs/apk/app-release.apk" -F "uKey=4006bd846ef865d76e72020fc4c23a43" -F "_api_key=cf5375f45349a93145a0fa0c277493e0" https://www.pgyer.com/apiv1/app/upload
+after_script:
+- pwd
