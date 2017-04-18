@@ -15,6 +15,7 @@ script:
 - "./gradlew assembleRelease"
 before_install:
 - chmod +x gradlew
+- ruby --version
 - gem install fir-cli
 deploy:
   provider: releases
