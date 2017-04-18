@@ -1,0 +1,1 @@
+echo ruby-2.2.0 > .ruby-version
