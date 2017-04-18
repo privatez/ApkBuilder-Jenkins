@@ -1,9 +1,4 @@
-language:
-- android
-- ruby
-rvm:
-  - 2.2
-  - jruby
+language: android
 sudo: false
 jdk:
 - oraclejdk8
@@ -20,6 +15,8 @@ script:
 - "./gradlew assembleRelease"
 before_install:
 - chmod +x gradlew
+- rvm install ruby-2.2.0
+- rvm --default use 2.2.0
 - gem install fir-cli
 deploy:
   provider: releases
